@@ -10,7 +10,7 @@ public final class ListWordsDao implements IWordsDao {
     private final List<String> words;
     private final Random random;
 
-    public ListWordsDao(){
+    public ListWordsDao() {
         random = new Random();
         words = new ArrayList<>();
 
@@ -20,8 +20,9 @@ public final class ListWordsDao implements IWordsDao {
     @Override
     public String getRandomWord() throws ArrayIndexOutOfBoundsException {
 
-        if (words == null || words.isEmpty())
+        if (words == null || words.isEmpty()) {
             throw new ArrayIndexOutOfBoundsException("There are no elements in words list.");
+        }
 
         return words.get(random.nextInt(words.size()));
     }

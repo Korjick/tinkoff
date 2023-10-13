@@ -7,6 +7,12 @@ import edu.project1.game.GameRuleUtils;
 import java.io.IOException;
 
 public class HangmanGame {
+
+    private HangmanGame() {
+
+    }
+
+    @SuppressWarnings("UncommentedMain")
     public static void main(String[] args) {
         try {
             IWordsDao wordsDao = new ListWordsDao();
@@ -16,17 +22,17 @@ public class HangmanGame {
                 throw new IllegalArgumentException();
             }
 
-            Game game = new Game(System.in, 5, word);
+            Game game = new Game(System.in, GameRuleUtils.ATTEMPT_COUNT, word);
             game.start();
         } catch (IOException e) {
-            System.out.println("Unsupported input system");
+            GameRuleUtils.printLog("Unsupported input system");
         } catch (IllegalArgumentException e) {
-            System.out.printf(
-                "Incorrect word spotted. " +
-                    "Word must contains at least %d character & not contain %s pattern. " +
-                    "Game stopped!", GameRuleUtils.minWordLen, GameRuleUtils.wrongWordPattern.pattern());
+            GameRuleUtils.printLog(
+                "Incorrect word spotted. "
+                    + "Word must contains at least %d character & not contain %s pattern. "
+                    + "Game stopped!", GameRuleUtils.MIN_WORD_LEN, GameRuleUtils.WRONG_WORD_PATTERN.pattern());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            GameRuleUtils.printLog(e.getMessage());
         }
     }
 }

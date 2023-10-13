@@ -9,7 +9,7 @@ import java.util.List;
 
 public final class Game {
 
-    private static final String replaceCharacter = "*";
+    private static final String REPLACE_CHARACTER = "*";
 
     private final BufferedReader bufferedSystemIn;
     private final int guessCount;
@@ -26,7 +26,7 @@ public final class Game {
         this.guessWord = guessWord;
 
         censoredWord = new StringBuilder(
-            guessWord.replaceAll(GameRuleUtils.anyCharacterPattern.pattern(), replaceCharacter));
+            guessWord.replaceAll(GameRuleUtils.ANY_CHARACTER_PATTERN.pattern(), REPLACE_CHARACTER));
         gameState = GameState.IN_GAME;
         guessAttempts = 1;
     }
@@ -34,13 +34,13 @@ public final class Game {
     public void start() throws IOException {
         String line;
 
-        System.out.printf("Game started. Censored word: %s. Guess a letter:\n", censoredWord);
+        GameRuleUtils.printLog("Game started. Censored word: %s. Guess a letter:\n", censoredWord);
         String guessWordProcess = GameRuleUtils.processInput(guessWord);
 
         while ((line = bufferedSystemIn.readLine()) != null) {
 
             if (!GameRuleUtils.isGuessLetterCorrect(line)) {
-                System.out.print("A typo has been spotted. Please re-enter letter\n");
+                GameRuleUtils.printLog("A typo has been spotted. Please re-enter letter\n");
                 continue;
             }
 
@@ -48,14 +48,14 @@ public final class Game {
             List<Integer> foundIndexes = GameRuleUtils.findAllLetterIndexesInWord(guessWordProcess, letter);
 
             if (!foundIndexes.isEmpty()) {
-                System.out.print("Hit!\n");
+                GameRuleUtils.printLog("Hit!\n");
                 foundIndexes.forEach(i -> censoredWord.setCharAt(i, guessWord.charAt(i)));
 
                 if (censoredWord.toString().equals(guessWord)) {
                     gameState = GameState.WON;
                 }
             } else {
-                System.out.printf("Missed, mistake %d out of %d.\n".formatted(guessAttempts, guessCount));
+                GameRuleUtils.printLog("Missed, mistake %d out of %d.\n".formatted(guessAttempts, guessCount));
                 guessAttempts++;
 
                 if (guessAttempts - 1 == guessCount) {
@@ -63,15 +63,15 @@ public final class Game {
                 }
             }
 
-            System.out.printf("The word: %s\n", censoredWord.toString());
+            GameRuleUtils.printLog("The word: %s\n", censoredWord.toString());
 
             if (gameState.equals(GameState.IN_GAME)) {
-                System.out.print("Guess a letter:\n");
+                GameRuleUtils.printLog("Guess a letter:\n");
             } else {
                 break;
             }
         }
 
-        System.out.printf(gameState.equals(GameState.WON) ? "You won!" : "You lost! The word was: %s", guessWord);
+        GameRuleUtils.printLog(gameState.equals(GameState.WON) ? "You won!" : "You lost! The word was: %s", guessWord);
     }
 }
