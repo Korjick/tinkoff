@@ -2,6 +2,7 @@ package edu.hw3;
 
 import java.util.TreeMap;
 
+@SuppressWarnings("MagicNumber")
 public class Task4 {
 
     private final static TreeMap<Integer, String> ROMAN_MAP = new TreeMap<>();
