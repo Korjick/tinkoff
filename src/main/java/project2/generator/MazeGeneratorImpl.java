@@ -1,8 +1,5 @@
 package project2.generator;
 
-import project2.entities.Cell;
-import project2.utils.Constants;
-import project2.entities.Maze;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,12 +7,15 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
+import project2.entities.Cell;
+import project2.entities.Maze;
+import project2.utils.Constants;
 
 public class MazeGeneratorImpl implements MazeGenerator {
 
     private final Random random;
 
-    public MazeGeneratorImpl(){
+    public MazeGeneratorImpl() {
         random = new Random();
     }
 
@@ -73,7 +73,7 @@ public class MazeGeneratorImpl implements MazeGenerator {
         return cellList;
     }
 
-    private void combineClusters(List<Cell> cellList){
+    private void combineClusters(List<Cell> cellList) {
         for (int i = 0; i < cellList.size() - 1; i++) {
             Cell left = cellList.get(i);
             Cell right = cellList.get(i + 1);
@@ -81,7 +81,7 @@ public class MazeGeneratorImpl implements MazeGenerator {
                 left.setRight(true);
                 right.setLeft(true);
             } else {
-                if(random.nextFloat() < Constants.WALL_PROBABILITY) {
+                if (random.nextFloat() < Constants.WALL_PROBABILITY) {
                     left.setRight(true);
                     right.setLeft(true);
                 } else {
@@ -91,11 +91,12 @@ public class MazeGeneratorImpl implements MazeGenerator {
         }
     }
 
-    private void setDown(List<Cell> cellList){
+    private void setDown(List<Cell> cellList) {
         Map<Integer, List<Cell>> clusters = cellList.stream().collect(Collectors.groupingBy(Cell::getClusterId));
         clusters.forEach((k, v) -> {
-            if (v.size() == 1)
+            if (v.size() == 1) {
                 return;
+            }
 
             int downCount = random.nextInt(1, v.size());
             Collections.shuffle(v);

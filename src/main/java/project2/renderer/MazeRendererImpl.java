@@ -1,13 +1,17 @@
 package project2.renderer;
 
-import project2.utils.Constants;
-import project2.entities.Cell;
-import project2.entities.Maze;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.LoggerContext;
+import project2.entities.Cell;
+import project2.entities.Maze;
+import project2.utils.Constants;
 
 public class MazeRendererImpl implements MazeRenderer {
+
+    private static final Logger LOGGER = LoggerContext.getContext().getLogger(MazeRendererImpl.class);
 
     private final Map<BorderType, Character[][]> borderMap = new HashMap<>();
 
@@ -47,14 +51,16 @@ public class MazeRendererImpl implements MazeRenderer {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 result[i][j] =
-                    array1[i][j].equals(Constants.WALL) || array2[i][j].equals(Constants.WALL) ? Constants.WALL :
-                        Constants.SPACE;
+                    array1[i][j].equals(Constants.WALL) || array2[i][j].equals(Constants.WALL)
+                        ? Constants.WALL
+                        : Constants.SPACE;
             }
         }
 
         return result;
     }
 
+    @SuppressWarnings("NestedForDepth")
     @Override
     public void render(Maze maze) {
         Character[][] arr = new Character[maze.getHeight() * (Constants.CELL_RENDER_SIZE - 1) + 1][
@@ -82,9 +88,10 @@ public class MazeRendererImpl implements MazeRenderer {
                     initial = combineArrays(initial, borderMap.get(BorderType.RIGHT));
                 }
 
-                for (int k = 0; k < 3; k++) {
-                    for (int l = 0; l < 3; l++) {
-                        if(arr[i * 2 + k][j * 2 + l].equals(Constants.WALL)) {
+                for (int k = 0; k < Constants.CELL_RENDER_SIZE; k++) {
+                    for (int l = 0; l < Constants.CELL_RENDER_SIZE; l++) {
+                        if (arr[i * (Constants.CELL_RENDER_SIZE - 1) + k][j * (Constants.CELL_RENDER_SIZE - 1) + l]
+                            .equals(Constants.WALL)) {
                             continue;
                         }
                         arr[i * 2 + k][j * 2 + l] = initial[k][l];
@@ -94,7 +101,7 @@ public class MazeRendererImpl implements MazeRenderer {
         }
 
         for (Character[] line : arr) {
-            System.out.println(Arrays.toString(line));
+            LOGGER.info(Arrays.toString(line));
         }
     }
 }

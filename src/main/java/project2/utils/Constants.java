@@ -1,8 +1,10 @@
 package project2.utils;
 
-import java.util.Arrays;
-
 public final class Constants {
+
+    private Constants() {
+
+    }
 
     public static final Character WALL = '█';
     public static final Character SPACE = ' ';
