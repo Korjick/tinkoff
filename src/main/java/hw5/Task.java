@@ -42,6 +42,8 @@ public class Task {
 
     private static final Pattern A01_CONSISTENCE_PATTERN = Pattern.compile("^(?!.*11)[01]+$");
     private static final Pattern A01_ODD_PATTERN = Pattern.compile("^(?:[01]{2})*[01]$");
+    private static final Pattern A01_MOD_THREE_PATTERN = Pattern.compile("^(1*01*01*01*)*$");
+    private static final Pattern A01_EXCEPT_PATTERN = Pattern.compile("^(?!11$|111$)[01]*$");
 
     private Task() {
 
@@ -141,5 +143,21 @@ public class Task {
 
     public static boolean hasLengthBetweenOneAndThree(String input) {
         return A01_LEN_PATTERN.matcher(input).find();
+    }
+
+    public static boolean hasNoConsistenceOnes(String input) {
+        return A01_CONSISTENCE_PATTERN.matcher(input).find();
+    }
+
+    public static boolean hasOddLengthString(String input) {
+        return A01_ODD_PATTERN.matcher(input).find();
+    }
+
+    public static boolean hasQuantityOfZeroModThree(String input) {
+        return A01_MOD_THREE_PATTERN.matcher(input).find();
+    }
+
+    public static boolean hasAnyExceptDoubleOrTripleOnes(String input) {
+        return A01_EXCEPT_PATTERN.matcher(input).find();
     }
 }

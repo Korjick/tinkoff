@@ -155,4 +155,38 @@ class TaskTest {
         input = "1011";
         assertFalse(Task.hasLengthBetweenOneAndThree(input));
     }
+
+    @Test
+    void hasNoConsistenceOnes() {
+        String input = "100";
+        assertTrue(Task.hasNoConsistenceOnes(input));
+        input = "11";
+        assertFalse(Task.hasNoConsistenceOnes(input));
+    }
+
+    @Test
+    void hasOddLengthString() {
+        String input = "100";
+        assertTrue(Task.hasOddLengthString(input));
+        input = "1111";
+        assertFalse(Task.hasOddLengthString(input));
+    }
+
+    @Test
+    void hasQuantityOfZeroModThree() {
+        String input = "10001";
+        assertTrue(Task.hasQuantityOfZeroModThree(input));
+        input = "100010";
+        assertFalse(Task.hasQuantityOfZeroModThree(input));
+    }
+
+    @Test
+    void hasAnyExceptDoubleOrTripleOnes() {
+        String input = "10001";
+        assertTrue(Task.hasAnyExceptDoubleOrTripleOnes(input));
+        input = "11";
+        assertFalse(Task.hasAnyExceptDoubleOrTripleOnes(input));
+        input = "111";
+        assertFalse(Task.hasAnyExceptDoubleOrTripleOnes(input));
+    }
 }
