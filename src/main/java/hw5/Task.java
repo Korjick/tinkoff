@@ -32,7 +32,7 @@ public class Task {
     private static final String PARSE_DATA_DAY_AGO = "day ago";
     private static final String PARSE_DATA_DAYS_AGO = "days ago";
 
-    private static final Pattern PASSWORD_CORRECT_PATTERN = Pattern.compile("[~!@#$%^&*|]");;
+    private static final Pattern PASSWORD_CORRECT_PATTERN = Pattern.compile("[~!@#$%^&*|]");
 
     private static final Pattern LICENSE_PLATE_CORRECT_PATTERN = Pattern.compile("^[А-Я]{1}\\d{3}[А-Я]{2}\\d{3}$");
 
@@ -61,6 +61,7 @@ public class Task {
         return Duration.of(totalDuration.toMinutes() / sessions.size(), ChronoUnit.MINUTES);
     }
 
+    @SuppressWarnings("MagicNumber")
     public static List<LocalDate> findFridayThe13(int year) {
         List<LocalDate> fridayThe13ths = new ArrayList<>();
 
@@ -84,6 +85,7 @@ public class Task {
         return nextFriday13;
     }
 
+    @SuppressWarnings("ReturnCount")
     public static Optional<LocalDate> parseDate(String string) {
         for (DateTimeFormatter formatter : PARSE_DATA_DATE_FORMATTERS) {
             try {
