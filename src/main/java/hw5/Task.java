@@ -75,6 +75,7 @@ public class Task {
         return fridayThe13ths;
     }
 
+    @SuppressWarnings("MagicNumber")
     public static LocalDate findNextFridayThe13(LocalDate date) {
         LocalDate nextFriday13 = date.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
 
