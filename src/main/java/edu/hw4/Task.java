@@ -1,4 +1,4 @@
-package hw4;
+package edu.hw4;
 
 import java.util.Arrays;
 import java.util.Collection;

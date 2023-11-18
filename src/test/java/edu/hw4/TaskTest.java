@@ -1,4 +1,4 @@
-package hw4;
+package edu.hw4;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

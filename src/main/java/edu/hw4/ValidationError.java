@@ -1,4 +1,4 @@
-package hw4;
+package edu.hw4;
 
 public class ValidationError extends Error {
 

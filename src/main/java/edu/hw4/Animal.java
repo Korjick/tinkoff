@@ -1,4 +1,4 @@
-package hw4;
+package edu.hw4;
 
 import java.lang.reflect.Field;
 import java.util.HashSet;
