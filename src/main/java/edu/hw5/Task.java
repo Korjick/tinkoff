@@ -1,4 +1,4 @@
-package hw5;
+package edu.hw5;
 
 import java.time.DayOfWeek;
 import java.time.Duration;
